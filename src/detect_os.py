@@ -1,10 +1,16 @@
 #!/usr/bin/env python3
-# Detect OS/distro id or name
+# Detect OS/distro ID or name
 
 import os
 
-def get_distro_id(path_prepend=""):
-    distro_id = None
+def get_distro_id(path_prepend: str = "") -> str:
+    """
+    Detect OS/distro ID.
+
+    :param str path_prepend: The root folder prefix. Defaults to None.
+    :return: The ID of the OS or distro.
+    """
+    distro_id: str | None = None
     while distro_id == None:
         if os.path.exists(f"{path_prepend}/etc/lsb-release"):
             with open(f"{path_prepend}/etc/lsb-release", "r") as temp:
@@ -25,8 +31,14 @@ def get_distro_id(path_prepend=""):
                 break
     return distro_id
 
-def get_distro_name(path_prepend=""):
-    distro_name = None
+def get_distro_name(path_prepend: str = "") -> str:
+    """
+    Detect OS/distro name.
+
+    :param str path_prepend: The root folder prefix. Defaults to None.
+    :return str distro_name: The name of the OS or distro.
+    """
+    distro_name: str | None = None
     while distro_name == None:
         if os.path.exists(f"{path_prepend}/etc/lsb-release"):
             with open(f"{path_prepend}/etc/lsb-release", "r") as temp:
@@ -46,4 +58,3 @@ def get_distro_name(path_prepend=""):
                 distro_name = etcf.split('-')[0].capitalize()
                 break
     return distro_name
-
